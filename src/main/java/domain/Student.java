@@ -21,10 +21,11 @@ public class Student extends BasicStudent {
         JsonObject res = super.toJsonObject();
         
         JsonObject jExam = new JsonObject();
+
         for(Tuple<String, Integer> exam: exams){
-            jExams.add(new JsonPair(exam.key,new JsonNumber(exam.value)));
+            jExam.add(new JsonPair(exam.key,new JsonNumber(exam.value)));
         }
-        res.add(new JsonPair("exams", jExams));
+        res.add(new JsonPair("exams", jExam));
         return res;
     }
 }
