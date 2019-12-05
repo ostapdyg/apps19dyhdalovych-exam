@@ -41,7 +41,7 @@ public class JSONApp {
         JsonObject jsonObject = new JsonObject();
         jsonObject.add(new JsonPair("name", new JsonString("Andrii")));
         jsonObject.add(new JsonPair("surname", new JsonString("Rodionov")));
-        jsonObject.add(new JsonPair("year", new JsonNumber(3)));
+        jsonObject.add(new JsonPair("year", new JsonNumber(2)));
         List<Json> lExams = new ArrayList<Json>();
         lExams.add(new JsonObject(
             new JsonPair("course",new JsonString("OOP")),
@@ -58,7 +58,7 @@ public class JSONApp {
             new JsonPair("mark",new JsonNumber(2)),
             new JsonPair("passed",new JsonBoolean(false))
         ));
-        Json jExams = new JsonArray();
+        Json jExams = new JsonArray(lExams.toArray(new JsonObject[0]));
         jsonObject.add( new JsonPair("exams", jExams));
     return jsonObject;
     }

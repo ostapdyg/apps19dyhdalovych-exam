@@ -3,6 +3,7 @@ package domain;
 import json.*;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -11,6 +12,7 @@ import java.util.List;
 public class Student extends BasicStudent {
 
     private Tuple<String, Integer>[] exams;
+
     public Student(String name, String surname, Integer year, Tuple<String, Integer>... exams) {
         super(name, surname, year);
         this.exams = exams;
@@ -20,12 +22,16 @@ public class Student extends BasicStudent {
     public JsonObject toJsonObject() {
         JsonObject res = super.toJsonObject();
         
-        JsonObject jExam = new JsonObject();
+        LinkedList<JsonObject> lExams = new LinkedList<JsonObject>();
 
         for(Tuple<String, Integer> exam: exams){
-            jExam.add(new JsonPair(exam.key,new JsonNumber(exam.value)));
+            JsonObject jExam = new JsonObject();
+            jExam.add(new JsonPair("course", new JsonString(exam.key)));
+            jExam.add(new JsonPair("mark", new JsonNumber(exam.value)));
+            jExam.add(new JsonPair("passed", new JsonBoolean(exam.value>2)));
+            lExams.add(jExam);
         }
-        res.add(new JsonPair("exams", jExam));
+        res.add(new JsonPair("exams", new JsonArray(lExams.toArray(new Json[0]))));
         return res;
     }
 }
