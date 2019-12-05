@@ -10,12 +10,21 @@ import java.util.List;
  */
 public class Student extends BasicStudent {
 
+    private Tuple<String, Integer>[] exams;
     public Student(String name, String surname, Integer year, Tuple<String, Integer>... exams) {
-        // ToDo
-    }
+        super(name, surname, year);
+        this.exams = exams;
 
+    }
+    @Override
     public JsonObject toJsonObject() {
-        // ToDo
-        return null;
+        JsonObject res = super.toJsonObject();
+        
+        JsonObject jExam = new JsonObject();
+        for(Tuple<String, Integer> exam: exams){
+            jExams.add(new JsonPair(exam.key,new JsonNumber(exam.value)));
+        }
+        res.add(new JsonPair("exams", jExams));
+        return res;
     }
 }

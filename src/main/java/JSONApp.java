@@ -2,7 +2,9 @@ import domain.BasicStudent;
 import domain.Student;
 import json.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -36,8 +38,27 @@ public class JSONApp {
 
 
     public static JsonObject sessionResult() {
-        JsonObject jsonObject = null;
-        // ToDo
-        return jsonObject;
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add(new JsonPair("name", new JsonString("Andrii")));
+        jsonObject.add(new JsonPair("surname", new JsonString("Rodionov")));
+        List<Json> lExams = new ArrayList<Json>();
+        lExams.add(new JsonObject(
+            new JsonPair("course",new JsonString("OOP")),
+            new JsonPair("mark",new JsonNumber(3)),
+            new JsonPair("passed",new JsonBoolean(true))
+        ));
+        lExams.add(new JsonObject(
+            new JsonPair("course",new JsonString("English")),
+            new JsonPair("mark",new JsonNumber(5)),
+            new JsonPair("passed",new JsonBoolean(true))
+        ));
+        lExams.add(new JsonObject(
+            new JsonPair("course",new JsonString("Math")),
+            new JsonPair("mark",new JsonNumber(2)),
+            new JsonPair("passed",new JsonBoolean(false))
+        ));
+        Json jExams = new JsonArray();
+        jsonObject.add( new JsonPair("marks", jExams));
+    return jsonObject;
     }
 }
